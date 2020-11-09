@@ -92,7 +92,7 @@
             <li class="nav-item ml-4" data-toggle="tooltip"
               data-placement="bottom" title="切换明暗">
               <a type="button" class="nav-link waves-effect waves-light px-0"
-                onclick="_toggle_contrast()">
+                onclick="toggle_contrast()">
                 <i class="fas fa-moon fa-lg"></i>
                 <i class="fas fa-sun fa-lg d-none"></i>
               </a>
@@ -237,6 +237,7 @@
   </script>
   <!-- Custom scripts -->
   <script type="text/javascript" src="{% static 'nlp/js/style.js' %}"></script>
+  {% block custom_js %}{% endblock %}
 
 </body>
 

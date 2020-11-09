@@ -7,6 +7,19 @@ active
 {% endblock %}
 <!-- Active -->
 
+<!-- Custom styles -->
+{% block custom_css %}
+
+<!-- PDF Reader -->
+<!-- <link rel="stylesheet" href="{% static 'sciencehammer/css/pdfjs/pdf_viewer.min.css' %}"> -->
+<!-- Custom -->
+<!-- <link rel="stylesheet" href="{% static 'sciencehammer/css/custom/extract.css' %}"> -->
+<!-- Annotation -->
+<link rel="stylesheet" href="{% static 'nlp/css/annotation.css' %}">
+
+{% endblock %}
+<!-- Custom styles -->
+
 <!-- Page Layout -->
 {% block page_layout %}
 <div class="container page-container">
@@ -38,12 +51,12 @@ active
 
     <!-- Left Tab -->
     <div class="col-12 col-lg-6 col-tab">
-      <div class="z-depth-1 rounded object-bgcolor moon h-100" id="left_tab">
+      <div class="z-depth-1 rounded object-bgcolor moon" id="left_tab">
 
         <!-- Extract Button -->
         <button type="button"
           class="btn btn-primary tab-button px-2 py-1 px-sm-4 m-0"
-          id="extract_button">
+          id="extract_button" onclick="trigger_extract()">
           开始抽取
           <i class="fas fa-arrow-right ml-1"></i>
         </button>
@@ -64,32 +77,57 @@ active
           <li class="nav-item">
             <a class="nav-link stress-color object-bgcolor moon active"
               id="tab_nav_text" data-toggle="tab" href="#tab_pane_text"
-              role="tab" onclick="_switch_mode_to_text()">文字</a>
+              role="tab" onclick="switch_mode_to_text()">文字</a>
           </li>
           <li class="nav-item">
             <a class="nav-link stress-color object-bgcolor moon"
               id="tab_nav_doc" data-toggle="tab" href="#tab_pane_doc" role="tab"
-              onclick="_switch_mode_to_doc()">文档</a>
+              onclick="switch_mode_to_doc()">文档</a>
           </li>
         </ul>
         <!-- Nav -->
 
         <!-- Pane -->
         <div class="tab-content" id="left_pane">
+
+          <!-- Content Text -->
           <div class="tab-pane fade show active" id="tab_pane_text"
             role="tabpanel" aria-labelledby="tab_nav_text">
+
+            <!-- Textarea -->
+            {% csrf_token %}
             <textarea
               class="form-control pane-body stress-color object-bgcolor moon"
-              id="source_textarea" rows="14" maxlength="5000"
-              placeholder="在此输入以抽取。" autofocus></textarea>
+              id="left_text_area" rows="14" maxlength="5000"
+              placeholder="在此输入以抽取。&#10;点击抽取按钮来提交输入文本。" autofocus></textarea>
+            <!-- Textarea -->
+
+            <!-- Textarea -->
+
+            <!-- Textarea -->
+
+            <!-- Statistic -->
+            <div class="pane-widget stress-color moon" id="left_text_stat">
+              <span id="left_text_stat_curr">0</span>
+              <span>/</span>
+              <span>5000</span>
+            </div>
+            <!-- Statistic -->
+
           </div>
+          <!-- Content Text -->
+
+          <!-- Content Doc -->
           <div class="tab-pane fade" id="tab_pane_doc" role="tabpanel"
             aria-labelledby="tab_nav_doc">
             <textarea
               class="form-control pane-body stress-color object-bgcolor moon"
               id="source_textarea1" rows="14" maxlength="5000"
-              placeholder="此处显示抽取结果。" autofocus></textarea>
+              placeholder="在此输入以抽取。&#10;点击抽取按钮来提交输入文本。" autofocus></textarea>
           </div>
+          <!-- Content Doc -->
+
+
         </div>
         <!-- Pane -->
 
@@ -99,7 +137,7 @@ active
 
     <!-- Right Tab -->
     <div class="col-12 col-lg-6 col-tab">
-      <div class="z-depth-1 rounded object-bgcolor moon h-100" id="right_tab">
+      <div class="z-depth-1 rounded object-bgcolor moon" id="right_tab">
 
         <!-- Export Button -->
         <button type="button"
@@ -115,26 +153,41 @@ active
           role="tablist">
           <li class="nav-item">
             <a class="nav-link stress-color object-bgcolor moon active"
-              id="tab_nav_output" data-toggle="tab" href="#tab_pane_output"
-              role="tab" aria-controls="tab_pane_output"
-              aria-selected="true">结果</a>
+              id="tab_nav_result" data-toggle="tab" href="#tab_pane_result"
+              role="tab">结果</a>
           </li>
         </ul>
         <!-- Nav -->
 
         <!-- Pane -->
         <div class="tab-content" id="right_pane">
-          <div class="tab-pane fade show active" id="tab_pane_output"
-            role="tabpanel" aria-labelledby="tab_nav_output">
+
+          <!-- Result -->
+          <div class="tab-pane fade show active" id="tab_pane_result"
+            role="tabpanel" aria-labelledby="tab_nav_result">
 
             <!-- Showcase -->
-            <div class="target-showcase pane-body" id="showcase_extract"
-              data-simplebar>
+            <div class="target-showcase pane-body stress-color" id="showcase_extract">
 
             </div>
             <!-- Showcase -->
 
+            <!-- Mask -->
+            <div
+              class="tab-mask stress-color object-bgcolor moon user-select-none rounded-bottom"
+              id="mask_extract_result">
+              <div class="flex-column flex-center">
+                <div class="spinner-grow" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <h6 class="mx-3 mt-5">请耐心等待</h6>
+              </div>
+            </div>
+            <!-- Mask -->
+
           </div>
+          <!-- Result -->
+
         </div>
         <!-- Pane -->
 
@@ -168,3 +221,10 @@ active
   命名实体识别（NER）的任务是在文本中查找每个提及的命名实体并标记其类型。关系抽取（RE）的任务是查找和分类文本实体之间的语义关系，通常是二元关系。</p>
 {% endblock %}
 <!-- Page Intro -->
+
+
+<!-- Custom scripts -->
+{% block custom_js %}
+<script type="text/javascript" src="{% static 'nlp/js/annotation.js' %}"></script>
+{% endblock %}
+<!-- Custom scripts -->

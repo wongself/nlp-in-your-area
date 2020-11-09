@@ -16,24 +16,12 @@
 
 /* Selection */
 
-/* Spinner */
-.spinner-border-sm {
-  width: .9rem;
-  height: .9rem;
-}
-
-/* Spinner */
-
 /* Header */
-.nav-link {
+.navbar .nav-link {
   font-weight: 500;
 }
 
 /* Header */
-
-/* Footer */
-
-/* Footer */
 
 /* Page */
 .page-main {
@@ -57,6 +45,7 @@
 #left_tab,
 #right_tab {
   position: relative;
+  height: 100%;
 }
 
 .tab-button {
@@ -101,6 +90,15 @@
 /* Tab Nav */
 
 /* Tab Pane */
+.tab-content {
+  height: calc(100% - 48px);
+}
+
+.tab-pane {
+  position: relative;
+  height: 100%;
+}
+
 .pane-body {
   height: 100%;
   min-height: 375.4px;
@@ -114,4 +112,42 @@
   resize: none;
 }
 
+.pane-widget {
+  display: block;
+  position: absolute;
+  bottom: 1rem;
+}
+
+.pane-widget button {
+  text-decoration: none;
+}
+
+#left_text_stat {
+  text-align: right;
+  right: 1rem;
+}
+
 /* Tab Pane */
+
+/* Mask */
+.tab-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+  z-index: 1;
+}
+
+.spinner-grow {
+  width: 3rem;
+  height: 3rem;
+}
+
+.spinner-border-sm {
+  width: .9rem;
+  height: .9rem;
+}
+
+/* Mask */
