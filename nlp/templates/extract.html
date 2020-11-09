@@ -1,0 +1,170 @@
+{% extends './base.html' %}
+{% load static %}
+
+<!-- Active -->
+{% block nav_extract %}
+active
+{% endblock %}
+<!-- Active -->
+
+<!-- Page Layout -->
+{% block page_layout %}
+<div class="container page-container">
+
+  <!-- Menu -->
+  <div class="row row-menu">
+    <div class="col-12 col-menu">
+
+      <!-- Language -->
+      <button
+        class="btn dropdown-toggle stress-color object-bgcolor moon px-3 py-2 m-0"
+        type="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false" style="font-size: 1rem;"><span
+          class="d-none d-sm-inline-block mr-1">源语言</span><span
+          class="font-weight-bold">英文</span></button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" type="button">英文</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" type="button">中文（暂不支持）</a>
+      </div>
+      <!-- Language -->
+
+    </div>
+  </div>
+  <!-- Menu -->
+
+  <!-- Tab -->
+  <div class="row row-tab mt-2 mt-sm-4">
+
+    <!-- Left Tab -->
+    <div class="col-12 col-lg-6 col-tab">
+      <div class="z-depth-1 rounded object-bgcolor moon h-100" id="left_tab">
+
+        <!-- Extract Button -->
+        <button type="button"
+          class="btn btn-primary tab-button px-2 py-1 px-sm-4 m-0"
+          id="extract_button">
+          开始抽取
+          <i class="fas fa-arrow-right ml-1"></i>
+        </button>
+        <!-- Extract Button -->
+
+        <!-- Upload Button -->
+        <button type="button"
+          class="btn btn-primary tab-button px-2 py-1 px-sm-4 m-0"
+          id="upload_button" style="display: none;">
+          上传文档
+          <i class="fas fa-arrow-up ml-1"></i>
+        </button>
+        <!-- Upload Button -->
+
+        <!-- Nav -->
+        <ul class="nav nav-tabs headup-bgcolor moon" id="left_nav"
+          role="tablist">
+          <li class="nav-item">
+            <a class="nav-link stress-color object-bgcolor moon active"
+              id="tab_nav_text" data-toggle="tab" href="#tab_pane_text"
+              role="tab" onclick="_switch_mode_to_text()">文字</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link stress-color object-bgcolor moon"
+              id="tab_nav_doc" data-toggle="tab" href="#tab_pane_doc" role="tab"
+              onclick="_switch_mode_to_doc()">文档</a>
+          </li>
+        </ul>
+        <!-- Nav -->
+
+        <!-- Pane -->
+        <div class="tab-content" id="left_pane">
+          <div class="tab-pane fade show active" id="tab_pane_text"
+            role="tabpanel" aria-labelledby="tab_nav_text">
+            <textarea
+              class="form-control pane-body stress-color object-bgcolor moon"
+              id="source_textarea" rows="14" maxlength="5000"
+              placeholder="在此输入以抽取。" autofocus></textarea>
+          </div>
+          <div class="tab-pane fade" id="tab_pane_doc" role="tabpanel"
+            aria-labelledby="tab_nav_doc">
+            <textarea
+              class="form-control pane-body stress-color object-bgcolor moon"
+              id="source_textarea1" rows="14" maxlength="5000"
+              placeholder="此处显示抽取结果。" autofocus></textarea>
+          </div>
+        </div>
+        <!-- Pane -->
+
+      </div>
+    </div>
+    <!-- Left Tab -->
+
+    <!-- Right Tab -->
+    <div class="col-12 col-lg-6 col-tab">
+      <div class="z-depth-1 rounded object-bgcolor moon h-100" id="right_tab">
+
+        <!-- Export Button -->
+        <button type="button"
+          class="btn btn-blue-grey tab-button px-2 py-1 px-sm-4 m-0"
+          id="export_predict_button">
+          导出结果
+          <i class="fas fa-share ml-1"></i>
+        </button>
+        <!-- Export Button -->
+
+        <!-- Nav -->
+        <ul class="nav nav-tabs headup-bgcolor moon" id="right_nav"
+          role="tablist">
+          <li class="nav-item">
+            <a class="nav-link stress-color object-bgcolor moon active"
+              id="tab_nav_output" data-toggle="tab" href="#tab_pane_output"
+              role="tab" aria-controls="tab_pane_output"
+              aria-selected="true">结果</a>
+          </li>
+        </ul>
+        <!-- Nav -->
+
+        <!-- Pane -->
+        <div class="tab-content" id="right_pane">
+          <div class="tab-pane fade show active" id="tab_pane_output"
+            role="tabpanel" aria-labelledby="tab_nav_output">
+
+            <!-- Showcase -->
+            <div class="target-showcase pane-body" id="showcase_extract"
+              data-simplebar>
+
+            </div>
+            <!-- Showcase -->
+
+          </div>
+        </div>
+        <!-- Pane -->
+
+      </div>
+    </div>
+    <!-- Right Tab -->
+
+  </div>
+  <!-- Tab -->
+
+</div>
+{% endblock %}
+<!-- Page Layout -->
+
+<!-- Page Intro -->
+{% block page_intro_img %}
+<img src="{% static 'nlp/img/svg/extract.svg' %}" class="img-fluid"
+  alt="Information Extraction">
+{% endblock %}
+
+{% block page_intro_title %}
+<h6 class="h6 pb-1"><i class="fas fa-file-invoice pr-2"></i>Information
+  Extraction</h6>
+{% endblock %}
+
+{% block page_intro_detail %}
+<h4 class="h4 mb-4">信息抽取</h4>
+<p class="font-weight-normal">
+  信息是指从非结构化或半结构化文档中提取结构化信息的技术，包含两部分：命名实体识别和关系抽取。</p>
+<p class="font-weight-normal">
+  命名实体识别（NER）的任务是在文本中查找每个提及的命名实体并标记其类型。关系抽取（RE）的任务是查找和分类文本实体之间的语义关系，通常是二元关系。</p>
+{% endblock %}
+<!-- Page Intro -->

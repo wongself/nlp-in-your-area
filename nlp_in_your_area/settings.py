@@ -25,13 +25,13 @@ SECRET_KEY = 'tp&t!y-%t(x#_@zhjur#gq1ofnigdmc(&gkr4*3u@ao1viy6z@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['101.124.42.4']
+ALLOWED_HOSTS = ['localhost', '101.124.42.4']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'nlp.apps.nlpConfig',
+    'nlp.apps.NlpConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

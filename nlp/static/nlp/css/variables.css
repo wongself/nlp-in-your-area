@@ -1,0 +1,156 @@
+/* Variables */
+:root {
+  /* Entity */
+  --entity-type-task-color: #eb323c;
+  --entity-type-method-color: #eb7f00;
+  --entity-type-metric-color: #bb9e0a;
+  --entity-type-material-color: #689f38;
+  --entity-type-generic-color: #2980b9;
+  --entity-type-otherscientificterm-color: #7a4ec7;
+  --entity-type-none-color: transparent;
+
+  /* Relation */
+  --relation-type-used-color: #eb323c;
+  --relation-type-feature-color: #eb7f00;
+  --relation-type-hyponym-color: #eeb100;
+  --relation-type-evaluate-color: #689f38;
+  --relation-type-part-color: #289976;
+  --relation-type-compare-color: #2980b9;
+  --relation-type-conjunction-color: #7a4ec7;
+  --relation-type-none-color: transparent;
+
+  /* Contrast */
+  --sun-stress-color: #495057;
+  --sun-headup-color: #d2d2d2;
+  --sun-object-color: #ffffff;
+  --sun-canvas-color: #f1f1f1;
+  --moon-stress-color: #e6e6e6;
+  --moon-headup-color: #393939;
+  --moon-object-color: #2e2e2e;
+  --moon-canvas-color: #212121;
+
+  /* Tab */
+  --tab-source-color: #bdbdbd;
+  --tab-source-dark: #9e9e9e;
+  --tab-extract-color: #b0bec5;
+  --tab-extract-dark: #90a4ae;
+}
+
+/* Variables */
+
+/* Fill */
+.logo-fill {
+  filter: unset;
+}
+
+.logo-fill.sun {
+  filter: invert(1);
+}
+
+.logo-fill.moon {
+  filter: unset;
+}
+
+/* Fill */
+
+/* Color */
+.stress-color {
+  color: var(--moon-stress-color) !important;
+}
+
+.headup-color {
+  color: var(--moon-headup-color) !important;
+}
+
+.object-color {
+  color: var(--moon-object-color) !important;
+}
+
+.canvas-color {
+  color: var(--moon-canvas-color) !important;
+}
+
+.stress-color.sun {
+  color: var(--sun-stress-color) !important;
+}
+
+.headup-color.sun {
+  color: var(--sun-headup-color) !important;
+}
+
+.object-color.sun {
+  color: var(--sun-object-color) !important;
+}
+
+.canvas-color.sun {
+  color: var(--sun-canvas-color) !important;
+}
+
+.stress-color.moon {
+  color: var(--moon-stress-color) !important;
+}
+
+.headup-color.moon {
+  color: var(--moon-headup-color) !important;
+}
+
+.object-color.moon {
+  color: var(--moon-object-color) !important;
+}
+
+.canvas-color.moon {
+  color: var(--moon-canvas-color) !important;
+}
+
+/* Color */
+
+/* Background Color */
+.stress-bgcolor {
+  background-color: var(--moon-stress-color) !important;
+}
+
+.headup-bgcolor {
+  background-color: var(--moon-headup-color) !important;
+}
+
+.object-bgcolor {
+  background-color: var(--moon-object-color) !important;
+}
+
+.canvas-bgcolor {
+  background-color: var(--moon-canvas-color) !important;
+}
+
+.stress-bgcolor.sun {
+  background-color: var(--sun-stress-color) !important;
+}
+
+.headup-bgcolor.sun {
+  background-color: var(--sun-headup-color) !important;
+}
+
+.object-bgcolor.sun {
+  background-color: var(--sun-object-color) !important;
+}
+
+.canvas-bgcolor.sun {
+  background-color: var(--sun-canvas-color) !important;
+}
+
+.stress-bgcolor.moon {
+  background-color: var(--moon-stress-color) !important;
+}
+
+.headup-bgcolor.moon {
+  background-color: var(--moon-headup-color) !important;
+}
+
+.object-bgcolor.moon {
+  background-color: var(--moon-object-color) !important;
+}
+
+.canvas-bgcolor.moon {
+  background-color: var(--moon-canvas-color) !important;
+}
+
+/* Background Color */
