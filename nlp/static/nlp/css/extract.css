@@ -18,7 +18,8 @@
   right: 1rem;
   display: flex;
   align-items: center;
-  /* z-index: 1; */
+  font-size: .875rem !important;
+  z-index: 1;
 }
 
 .tab-button i {
@@ -72,12 +73,9 @@
   border-top-right-radius: 0;
   border-bottom-left-radius: .25rem;
   border-bottom-right-radius: .25rem;
-  border: 0;
-  box-shadow: none !important;
   max-height: 75vh;
   overflow-y: auto;
   overflow-x: hidden;
-  resize: none;
 }
 
 .pane-mask {
@@ -94,6 +92,18 @@
   display: block;
   position: absolute;
   bottom: 1rem;
+  font-size: .875rem !important;
+  z-index: 1;
+}
+
+.pane-widget button {
+  display: flex;
+  align-items: center;
+}
+
+.pane-widget button i {
+  position: relative;
+  top: .125rem;
 }
 
 .pane-widget button,
@@ -132,6 +142,7 @@
   color: #959595;
   font-family: "Open Sans", sans-serif;
   font-size: 1.5rem;
+  z-index: 1;
 }
 
 .pane-placeholder .placeholder-note {

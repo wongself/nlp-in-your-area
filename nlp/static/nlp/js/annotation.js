@@ -3,16 +3,21 @@ function annotate_predict(jsentences, $annot) {
   $annot.html('')
 
   $.each(jsentences, function(s_index, jsentence) {
-    $annot.append(s_index ? '<br>' : '')
     annotate_sentence(s_index, jsentence, $annot)
   })
 
-  set_line_height($annot)
+  stylize_sentence_height($annot)
   $('[data-toggle="tooltip"]').tooltip()
 }
 
-function set_line_height($annot) {
-  var $cur_head = $annot.children('span:first')
+function stylize_sentence_height($annot) {
+  $annot.children('.showcase-sentence').each(function(index) {
+    stylize_line_height($(this))
+  })
+}
+
+function stylize_line_height($sent) {
+  var $cur_head = $sent.children('span:first')
   var arr_tokens = new Array()
 
   if ($cur_head.length <= 0) {
@@ -105,6 +110,9 @@ function annotate_sentence(s_index, jsentence, $annot) {
   var pre_end = 0
   var str = ''
 
+  str += '<div class="showcase-sentence" id="showcase_sentence_' + s_index + '">'
+  str += '<span class="target-index" id="target_index_' + s_index + '">' + s_index + '</span>'
+
   $.each(jentities, function(e_index, jentity) {
     var e_type = jentity['type']
     var e_start = jentity['start']
@@ -152,7 +160,7 @@ function annotate_sentence(s_index, jsentence, $annot) {
   str += '</span>'
 
   // Append Sentences
-  $annot.append(str)
+  $annot.append(str + '<br class="target-br"></div>')
 
   // Relation
   var layer_rel = arrange_relation(jrelations)
@@ -174,7 +182,7 @@ function annotate_sentence(s_index, jsentence, $annot) {
       class="fas fa-caret-down target-caret" \
       id="' + annot_id + '_caret_tail_' + rel_id + '"></i>')
 
-    // connect_relation(rel_id, r_type, layer_rel[r_index], $tgt_token_head, $tgt_token_tail, $annot)
+    connect_relation(rel_id, r_type, layer_rel[r_index], $tgt_token_head, $tgt_token_tail, $annot)
   })
 }
 
@@ -514,14 +522,13 @@ function get_verbosed_rtype(short) {
 
 function get_rtype_color(verbose) {
   var verbose_to_color = {
-    'USED-FOR': rtype_used_color,
-    'FEATURE-OF': rtype_feature_color,
-    'HYPONYM-OF': rtype_hyponym_color,
-    'EVALUATE-FOR': rtype_evaluate_color,
-    'PART-OF': rtype_part_color,
-    'COMPARE': rtype_compare_color,
-    'CONJUNCTION': rtype_conjunction_color,
+    'Used-for': rtype_used_color,
+    'Feature-of': rtype_feature_color,
+    'Hyponym-of': rtype_hyponym_color,
+    'Evaluate-for': rtype_evaluate_color,
+    'Part-of': rtype_part_color,
+    'Compare': rtype_compare_color,
+    'Conjunction': rtype_conjunction_color,
   }
   return verbose_to_color[verbose]
 }
-

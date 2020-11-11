@@ -10,8 +10,6 @@ active
 <!-- Custom styles -->
 {% block custom_css %}
 
-<!-- Scroll Bar -->
-<link rel="stylesheet" href="{% static 'nlp/css/simplebar.min.css' %}">
 <!-- Custom -->
 <link rel="stylesheet" href="{% static 'nlp/css/extract.css' %}">
 <!-- Annotation -->
@@ -82,10 +80,12 @@ active
 
             <!-- Textarea -->
             {% csrf_token %}
-            <textarea
-              class="form-control pane-body stress-color object-bgcolor moon"
-              id="left_text_area" rows="14" maxlength="5000"
-              autofocus></textarea>
+            <div class="pane-body pt-0 px-0">
+              <textarea
+                class="form-control stress-color object-bgcolor moon border-0 shadow-none h-100 pt-3 px-3 pb-0"
+                id="left_text_area" maxlength="5000" style="resize: none;"
+                autofocus></textarea>
+            </div>
             <!-- Textarea -->
 
             <!-- Placeholder -->
@@ -178,12 +178,22 @@ active
             role="tabpanel" aria-labelledby="tab_nav_result">
 
             <!-- Showcase -->
-            <div class="pane-body" id="annot_container"
-              style="padding-bottom: 1rem;" data-simplebar>
-              <div class="annot-showcase stress-color moon" id="annot_showcase">
+            <div class="pane-body pb-3" id="right_result_container"
+              data-simplebar>
+              <div class="annot-showcase stress-color moon"
+                id="right_result_area">
               </div>
             </div>
             <!-- Showcase -->
+
+            <!-- Placeholder -->
+            <div class="pane-placeholder" id="right_result_place">
+              <div class="placeholder-title">此处显示抽取结果。</div>
+              <div class="placeholder-note">
+                <p>点击<code>导出</code>按钮可下载&thinsp;JSON&thinsp;格式的抽取结果。</p>
+              </div>
+            </div>
+            <!-- Placeholder -->
 
             <!-- Mask -->
             <div
@@ -239,9 +249,6 @@ active
 <!-- Custom scripts -->
 {% block custom_js %}
 
-<!-- Scroll Bar -->
-<script type="text/javascript" src="{% static 'nlp/js/simplebar.min.js' %}">
-</script>
 <!-- Document -->
 <script type="text/javascript" src="{% static 'nlp/js/document.js' %}"></script>
 <script type="text/javascript" src="{% static 'nlp/js/docxtemplater.min.js' %}">
