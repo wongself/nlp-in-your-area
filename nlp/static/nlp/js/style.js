@@ -42,6 +42,13 @@ function ajax_src_submit(source, qtype) {
             flag = parse_extract(ret['jextract'])
             retry_ajax_submit(flag, this)
             break
+          case 'contrast':
+            if (ret['jcontrast'] == __ERROR__) {
+              raise_modal_error('未知错误，请重试！')
+              return
+            }
+            console.log('Switch to ' + ret['jcontrast'])
+            break
           default:
             raise_modal_error('未知错误，请重试！')
             break
@@ -102,34 +109,37 @@ function enable_operation(qtype) {
 
 // Contrast
 function toggle_contrast() {
-  if ($('.fa-moon').hasClass('d-none')) {
-    // Button
-    $('.fa-moon').removeClass('d-none')
-    $('.fa-sun').addClass('d-none')
-    // Page
-    $('.navbar').removeClass('navbar-light').addClass('navbar-dark')
-    $('.sun').each(function() {
-      $(this).removeClass('sun').addClass('moon')
-    })
-  } else if ($('.fa-sun').hasClass('d-none')) {
-    // Button
-    $('.fa-moon').addClass('d-none')
-    $('.fa-sun').removeClass('d-none')
-    // Page
-    $('.navbar').removeClass('navbar-dark').addClass('navbar-light')
-    $('.moon').each(function() {
-      $(this).removeClass('moon').addClass('sun')
-    })
+  var $contrast = $('#contrast_button i')
+  var [org, dst, src, tgt] = ['moon', 'sun', 'dark', 'light']
+  if ($contrast.hasClass('fa-moon')) {
+    [org, dst, src, tgt] = ['moon', 'sun', 'dark', 'light']
+  } else if ($contrast.hasClass('fa-sun')) {
+    [org, dst, src, tgt] = ['sun', 'moon', 'light', 'dark']
   } else {
     raise_modal_error('未知错误，请重试！')
+    return
   }
+
+  $contrast.removeClass('fa-' + org).addClass('fa-' + dst)
+  $('.navbar').removeClass('navbar-' + src).addClass('navbar-' + tgt)
+  $('.' + org).each(function() {
+    $(this).removeClass(org).addClass(dst)
+  })
+
+  ajax_src_submit({
+    'dst': dst,
+    'tgt': tgt
+  }, 'contrast')
 }
 
 function get_contrast() {
-  if (!($('.fa-moon').hasClass('d-none'))) {
+  $contrast = $('#contrast_button i')
+  if ($contrast.hasClass('fa-moon')) {
     return 'moon'
-  } else if (!($('.fa-sun').hasClass('d-none'))) {
+  } else if ($contrast.hasClass('fa-sun')) {
     return 'sun'
+  } else {
+    raise_modal_error('未知错误，请重试！')
   }
 }
 

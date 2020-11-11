@@ -23,6 +23,5 @@ $(function() {
   // Contrast
   $('#contrast_button').on('click', function() {
     docStyle.setProperty('--scroll-bar-color', gcStyle.getPropertyValue('--' + get_contrast() + '-stress-color'))
-    console.log(gcStyle.getPropertyValue('--scroll-bar-color'));
   })
 })
