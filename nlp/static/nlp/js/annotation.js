@@ -134,7 +134,7 @@ function annotate_sentence(s_index, jsentence, $annot) {
       onmouseenter="token_mouseentered(this)" \
       onmouseleave="token_mouseleaved(this)"><span \
       class="target-entity etype-bgcolor-' + e_type.toLowerCase() + ' \
-      bright moon" id="' + annot_id + '_entity_' + id_ent + '">'
+      bright ' + get_contrast() + '" id="' + annot_id + '_entity_' + id_ent + '">'
 
     for (let i = e_start; i < e_end; i++) {
       str += (i && i != e_start && !is_right_punctuation(jtokens[i]) && !is_left_punctuation(jtokens[i - 1])) ? '&nbsp;' : ''
