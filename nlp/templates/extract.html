@@ -10,10 +10,10 @@ active
 <!-- Custom styles -->
 {% block custom_css %}
 
-<!-- PDF Reader -->
-<!-- <link rel="stylesheet" href="{% static 'sciencehammer/css/pdfjs/pdf_viewer.min.css' %}"> -->
+<!-- Scroll Bar -->
+<link rel="stylesheet" href="{% static 'nlp/css/simplebar.min.css' %}">
 <!-- Custom -->
-<!-- <link rel="stylesheet" href="{% static 'sciencehammer/css/custom/extract.css' %}"> -->
+<link rel="stylesheet" href="{% static 'nlp/css/extract.css' %}">
 <!-- Annotation -->
 <link rel="stylesheet" href="{% static 'nlp/css/annotation.css' %}">
 
@@ -53,23 +53,14 @@ active
     <div class="col-12 col-lg-6 col-tab">
       <div class="z-depth-1 rounded object-bgcolor moon" id="left_tab">
 
-        <!-- Extract Button -->
+        <!-- Extract -->
         <button type="button"
           class="btn btn-primary tab-button px-2 py-1 px-sm-4 m-0"
           id="extract_button" onclick="trigger_extract()">
           开始抽取
           <i class="fas fa-arrow-right ml-1"></i>
         </button>
-        <!-- Extract Button -->
-
-        <!-- Upload Button -->
-        <button type="button"
-          class="btn btn-primary tab-button px-2 py-1 px-sm-4 m-0"
-          id="upload_button" style="display: none;">
-          上传文档
-          <i class="fas fa-arrow-up ml-1"></i>
-        </button>
-        <!-- Upload Button -->
+        <!-- Extract -->
 
         <!-- Nav -->
         <ul class="nav nav-tabs headup-bgcolor moon" id="left_nav"
@@ -77,12 +68,7 @@ active
           <li class="nav-item">
             <a class="nav-link stress-color object-bgcolor moon active"
               id="tab_nav_text" data-toggle="tab" href="#tab_pane_text"
-              role="tab" onclick="switch_mode_to_text()">文字</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link stress-color object-bgcolor moon"
-              id="tab_nav_doc" data-toggle="tab" href="#tab_pane_doc" role="tab"
-              onclick="switch_mode_to_doc()">文档</a>
+              role="tab">文字</a>
           </li>
         </ul>
         <!-- Nav -->
@@ -99,12 +85,35 @@ active
             <textarea
               class="form-control pane-body stress-color object-bgcolor moon"
               id="left_text_area" rows="14" maxlength="5000"
-              placeholder="在此输入以抽取。&#10;点击抽取按钮来提交输入文本。" autofocus></textarea>
+              autofocus></textarea>
             <!-- Textarea -->
 
-            <!-- Textarea -->
+            <!-- Placeholder -->
+            <div class="pane-placeholder" id="left_text_place">
+              <div class="placeholder-title">在此输入以抽取。</div>
+              <div class="placeholder-note">
+                <p>点击<code>抽取</code>按钮来提交输入文本。</p>
+                <p>
+                  点击<code>上传</code>按钮来上传&thinsp;.txt&thinsp;,&thinsp;.docx&thinsp;或&thinsp;.pptx&thinsp;文件。
+                </p>
+                <p>或者<code>拖拽</code>本机文档到本页。</p>
+              </div>
+            </div>
+            <!-- Placeholder -->
 
-            <!-- Textarea -->
+            <!-- Upload -->
+            <div class="pane-widget" id="left_text_upload">
+              <button type="button"
+                class="btn btn-link stress-color moon p-0 m-0"
+                id="upload_button">
+                <i class="fas fa-arrow-up mr-1"></i>
+                <span>上传文档</span>
+              </button>
+            </div>
+            {% csrf_token %}
+            <input type="file" id="upload_input" accept=".txt,.docx,.pptx"
+              style="display: none;">
+            <!-- Upload -->
 
             <!-- Statistic -->
             <div class="pane-widget stress-color moon" id="left_text_stat">
@@ -114,19 +123,21 @@ active
             </div>
             <!-- Statistic -->
 
+            <!-- Mask -->
+            <div
+              class="pane-mask mask-drag stress-color object-bgcolor moon user-select-none rounded-bottom"
+              id="mask_extract_drag">
+              <div class="flex-column flex-center">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Waiting...</span>
+                </div>
+                <h6 class="mx-3 mt-5">将文件拖放到本页</h6>
+              </div>
+            </div>
+            <!-- Mask -->
+
           </div>
           <!-- Content Text -->
-
-          <!-- Content Doc -->
-          <div class="tab-pane fade" id="tab_pane_doc" role="tabpanel"
-            aria-labelledby="tab_nav_doc">
-            <textarea
-              class="form-control pane-body stress-color object-bgcolor moon"
-              id="source_textarea1" rows="14" maxlength="5000"
-              placeholder="在此输入以抽取。&#10;点击抽取按钮来提交输入文本。" autofocus></textarea>
-          </div>
-          <!-- Content Doc -->
-
 
         </div>
         <!-- Pane -->
@@ -142,7 +153,7 @@ active
         <!-- Export Button -->
         <button type="button"
           class="btn btn-blue-grey tab-button px-2 py-1 px-sm-4 m-0"
-          id="export_predict_button">
+          id="export_button">
           导出结果
           <i class="fas fa-share ml-1"></i>
         </button>
@@ -167,18 +178,20 @@ active
             role="tabpanel" aria-labelledby="tab_nav_result">
 
             <!-- Showcase -->
-            <div class="target-showcase pane-body stress-color" id="showcase_extract">
-
+            <div class="pane-body" id="annot_container"
+              style="padding-bottom: 1rem;" data-simplebar>
+              <div class="annot-showcase stress-color moon" id="annot_showcase">
+              </div>
             </div>
             <!-- Showcase -->
 
             <!-- Mask -->
             <div
-              class="tab-mask stress-color object-bgcolor moon user-select-none rounded-bottom"
-              id="mask_extract_result">
+              class="pane-mask mask-wait stress-color object-bgcolor moon user-select-none rounded-bottom"
+              id="mask_extract_wait">
               <div class="flex-column flex-center">
                 <div class="spinner-grow" role="status">
-                  <span class="sr-only">Loading...</span>
+                  <span class="sr-only">Waiting...</span>
                 </div>
                 <h6 class="mx-3 mt-5">请耐心等待</h6>
               </div>
@@ -225,6 +238,23 @@ active
 
 <!-- Custom scripts -->
 {% block custom_js %}
-<script type="text/javascript" src="{% static 'nlp/js/annotation.js' %}"></script>
+
+<!-- Scroll Bar -->
+<script type="text/javascript" src="{% static 'nlp/js/simplebar.min.js' %}">
+</script>
+<!-- Document -->
+<script type="text/javascript" src="{% static 'nlp/js/document.js' %}"></script>
+<script type="text/javascript" src="{% static 'nlp/js/docxtemplater.min.js' %}">
+</script>
+<script type="text/javascript" src="{% static 'nlp/js/pizzip.min.js' %}">
+</script>
+<!-- Drag & Drop -->
+<script type="text/javascript" src="{% static 'nlp/js/dragdrop.js' %}"></script>
+<!-- Custom -->
+<script type="text/javascript" src="{% static 'nlp/js/extract.js' %}"></script>
+<!-- Annotation -->
+<script type="text/javascript" src="{% static 'nlp/js/annotation.js' %}">
+</script>
+
 {% endblock %}
 <!-- Custom scripts -->

@@ -1,8 +1,8 @@
+var __ERROR__ = '__ERROR__'
+var __SUCCESS__ = '__SUCCESS__'
+
 $(function() {
   // Initialization
-  // $('#source_textarea').val('')
-  // $('.target-text').html('')
-  // $('.tab-mask').show()
   $('[data-toggle="tooltip"]').tooltip()
   new WOW().init()
 
@@ -21,6 +21,7 @@ function ajax_src_submit(source, qtype) {
   // Print Source
   // console.log('source:', source)
 
+  var flag = __SUCCESS__
   var qurl = '../query_' + qtype + '/'
   $.ajax({
     type: 'post',
@@ -29,16 +30,17 @@ function ajax_src_submit(source, qtype) {
       'source': source,
       csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val()
     },
-    // try_count: 0,
-    // retry_limit: 3,
+    retry_count: 0,
+    retry_limit: 3,
     success: function(ret) {
       // Print Result
-      console.log('result:', ret)
+      // console.log('result:', ret)
 
       try {
         switch (qtype) {
           case 'extract':
-            parse_extract(ret['jextract'])
+            flag = parse_extract(ret['jextract'])
+            retry_ajax_submit(flag, this)
             break
           default:
             raise_modal_error('未知错误，请重试！')
@@ -48,6 +50,9 @@ function ajax_src_submit(source, qtype) {
         raise_modal_error('未知错误，请重试！')
         console.error(e)
       } finally {
+        if (flag == __ERROR__ && this.retry_count <= this.retry_limit) {
+          return
+        }
         enable_operation(qtype)
       }
     },
@@ -58,48 +63,20 @@ function ajax_src_submit(source, qtype) {
   })
 }
 
-// Extract
-function trigger_extract() {
-  var $src = $('#left_text_area')
-  var src = $src.val()
-
-  src = 'We introduce SpERT, an attention model for span-based joint entity and relation extraction. Our key contribution is a light-weight reasoning on BERT embeddings, which features entity recognition and filtering, as well as relation classification with a localized, marker-free context representation. The model is trained using strong within-sentence negative samples, which are efficiently extracted in a single BERT pass.'
-
-  src = src.replace(/(^\s*)|(\s*$)/g, '')
-  src = src.replace(/\s+/g, ' ')
-  $src.val(src)
-
-  if (src.length <= 0) {
-    raise_error('无有效输入！')
-    return
-  }
-
-  ajax_src_submit(src, 'extract')
-}
-
-function parse_extract(jresult) {
-  // var jents = jresult['entity']
-  // var jrels = jresult['relation']
-  $.each(jresult, function(index, jsent) {
-    console.log(jsent)
-  })
-  annotate_predict(jresult, $('#showcase_extract'))
-}
-
 // Operation
 function disable_operation(qtype) {
   switch (qtype) {
     case 'extract':
       // Mask
-      $('#mask_extract_result').fadeIn()
+      $('#mask_extract_wait').fadeIn()
       // Button
-      $('#extract_query_button').html('<div \
+      $('#extract_button').html('<div \
         class="spinner-border spinner-border-sm mr-1" \
         role="status" aria-hidden="true"></div>' + '抽取中...').addClass('disabled')
-      $('#upload_document_button').html('<div \
+      $('#upload_button').html('<div \
         class="spinner-border spinner-border-sm mr-1" \
         role="status" aria-hidden="true"></div>' + '上传中...').addClass('disabled')
-      $('#export_predict_button').addClass('disabled')
+      $('#export_button').addClass('disabled')
       break
     default:
       break
@@ -110,28 +87,17 @@ function enable_operation(qtype) {
   switch (qtype) {
     case 'extract':
       // Mask
-      $('#mask_extract_result').fadeOut()
+      $('#mask_extract_wait').fadeOut()
       // Button
-      $('#extract_query_button').html('开始抽取' + '<i \
+      $('#extract_button').html('开始抽取<i \
         class="fas fa-arrow-right ml-1"></i>').removeClass('disabled')
-      $('#upload_document_button').html('上传文档' + '<i \
-        class="fas fa-arrow-up ml-1"></i>').removeClass('disabled')
-      $('#export_predict_button').removeClass('disabled')
+      $('#upload_button').html('<i \
+        class="fas fa-arrow-up mr-1"></i>上传文档').removeClass('disabled')
+      $('#export_button').removeClass('disabled')
       break
     default:
       break
   }
-}
-
-// Mode
-function switch_mode_to_text() {
-  $('#extract_button').fadeIn()
-  $('#upload_button').hide()
-}
-
-function switch_mode_to_doc() {
-  $('#extract_button').hide()
-  $('#upload_button').fadeIn()
 }
 
 // Contrast
@@ -159,7 +125,52 @@ function toggle_contrast() {
   }
 }
 
+function get_contrast() {
+  if (!($('.fa-moon').hasClass('d-none'))) {
+    return 'moon'
+  } else if (!($('.fa-sun').hasClass('d-none'))) {
+    return 'sun'
+  }
+}
+
+// Is Empty
+function is_empty(obj) {
+  return (typeof obj === 'undefined' || obj == null || obj == '' || obj.length == 0)
+}
+
+// Punctuation
+function is_punctuation(s) {
+  var punctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+  return punctuation.includes(s)
+}
+
+function is_right_punctuation(s) {
+  var punctuation = '!"#$%&\')*+,-./:;<=>?@\\]^_`|}~'
+  return punctuation.includes(s)
+}
+
+function is_left_punctuation(s) {
+  var punctuation = '([{'
+  return punctuation.includes(s)
+}
+
 // Error
+function retry_ajax_submit(flag, $ajax) {
+  if (flag == __ERROR__) {
+    $ajax.retry_count++
+    if ($ajax.retry_count <= $ajax.retry_limit) {
+      console.error('获取预测结果失败，重试中... (' + $ajax.retry_count + '/' + $ajax.retry_limit + ')')
+      $('.mask-wait h6').html('请耐心等待，重试中...' + ' (' + $ajax.retry_count + '/' + $ajax.retry_limit + ')')
+      $.ajax($ajax)
+      return __ERROR__
+    } else {
+      raise_modal_error('获取预测结果失败！')
+      return __ERROR__
+    }
+  }
+  return __SUCCESS__
+}
+
 function raise_modal_error(error_info) {
   $('#modal_error #modal_error_content').text(error_info)
   $('#modal_error').modal()

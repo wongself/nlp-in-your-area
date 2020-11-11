@@ -25,6 +25,11 @@ def init_extarct():
     trainer = SpanTrainer(cfg, logger)
 
 
+@app.route('/')
+def hello_world():
+    return ' NLP in Your Area'
+
+
 @app.route('/query_extarct', methods=['POST'])
 def query_extarct():
     if request.method == 'POST':

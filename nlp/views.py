@@ -18,7 +18,8 @@ def query_extract(request):
 
         # Query
         try:
-            jresponse = requests.post('http://localhost:2334/query_extarct', data={'source': source})
+            jresponse = requests.post('http://localhost:2334/query_extarct',
+                                      data={'source': source})
             jextract = jresponse.json()['jextract']
         except Exception:
             jextract = '__ERROR__'
