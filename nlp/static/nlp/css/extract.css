@@ -67,8 +67,8 @@
 
 .pane-body {
   height: 100% !important;
-  min-height: 375.4px;
-  padding: 1rem 1rem 3.4rem;
+  min-height: 400px;
+  padding: 1rem;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: .25rem;

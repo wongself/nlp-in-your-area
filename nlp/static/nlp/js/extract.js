@@ -16,9 +16,10 @@ $(function() {
   }
 
   // Scrollbar
+  // new SimpleBar($('#left_text_container')[0])
   new SimpleBar($('#right_result_container')[0])
+  // $('#left_text_container').overlayScrollbars({ });
   // $('#right_result_container').overlayScrollbars({ });
-  // $('#left_text_area').overlayScrollbars({ });
 
   // Key Press
   $(document).on('keydown', function(e) {
