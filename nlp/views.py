@@ -10,7 +10,7 @@ def page_extract(request):
         context['contrast'] = request.session.get('contrast')
     if 'navbar' in request.session:
         context['navbar'] = request.session.get('navbar')
-    cookie_contrast(request)
+    session_contrast(request)
     return render(request, './extract.html', context)
 
 
@@ -50,7 +50,7 @@ def query_contrast(request):
         return JsonResponse({'jcontrast': '__SUCCESS__'})
 
 
-def cookie_contrast(request):
+def session_contrast(request):
     if 'contrast' not in request.session:
         request.session['contrast'] = 'moon'
     if 'navbar' not in request.session:

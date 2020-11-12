@@ -22,6 +22,11 @@ const rtype_conjunction_color = gcStyle.getPropertyValue('--relation-type-conjun
 $(function() {
   // Contrast
   $('#contrast_button').on('click', function() {
-    docStyle.setProperty('--scroll-bar-color', gcStyle.getPropertyValue('--' + get_contrast() + '-stress-color'))
+    toggle_scrollbar()
   })
+  toggle_scrollbar()
 })
+
+function toggle_scrollbar() {
+  docStyle.setProperty('--scroll-bar-color', gcStyle.getPropertyValue('--' + get_contrast() + '-stress-color'))
+}

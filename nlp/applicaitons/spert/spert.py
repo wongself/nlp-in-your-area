@@ -3,6 +3,7 @@ import datetime
 from flask import Flask, jsonify, request
 import nltk
 from pathlib import Path
+from waitress import serve
 
 from model.logger import Logger
 from model.trainer import SpanTrainer
@@ -11,6 +12,7 @@ trainer = None
 logger = None
 
 app = Flask(__name__)
+app.config.from_object('configure')
 
 
 def init_extarct():
@@ -57,4 +59,5 @@ def query_extarct():
 
 if __name__ == "__main__":
     init_extarct()
-    app.run(host='0.0.0.0', port=2334, debug=True)
+    # app.run(host='0.0.0.0', port=2334, debug=False)
+    serve(app, host="0.0.0.0", port=2334)

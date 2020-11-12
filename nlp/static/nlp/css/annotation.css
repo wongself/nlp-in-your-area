@@ -6,23 +6,17 @@
   line-height: 32px;
 }
 
+.showcase-sentence {
+  padding-bottom: .5rem;
+}
+
 .showcase-sentence::before {
   content: '';
   position: absolute;
   top: .25rem;
-  left: -.5rem;
+  left: -.625rem;
   bottom: .75rem;
   border-left: 3px solid var(--sentence-bar-color);
-}
-
-.target-index {
-  text-align: right;
-  position: absolute;
-  top: 50% !important;
-  transform: translateY(-50%);
-  right: 103%;
-  z-index: 1;
-  display: none;
 }
 
 .target-other,

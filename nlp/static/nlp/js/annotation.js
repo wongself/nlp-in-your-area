@@ -111,7 +111,6 @@ function annotate_sentence(s_index, jsentence, $annot) {
   var str = ''
 
   str += '<div class="showcase-sentence" id="showcase_sentence_' + s_index + '">'
-  str += '<span class="target-index" id="target_index_' + s_index + '">' + s_index + '</span>'
 
   $.each(jentities, function(e_index, jentity) {
     var e_type = jentity['type']
