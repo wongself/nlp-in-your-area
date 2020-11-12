@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import JsonResponse
 import requests
 import traceback
@@ -12,6 +12,10 @@ def page_extract(request):
         context['navbar'] = request.session.get('navbar')
     session_contrast(request)
     return render(request, './extract.html', context)
+
+
+def page_not_found(request, exception, template_name=''):
+    return redirect(page_extract)
 
 
 def query_extract(request):
