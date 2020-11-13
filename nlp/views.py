@@ -10,6 +10,8 @@ def page_extract(request):
         context['contrast'] = request.session.get('contrast')
     if 'navbar' in request.session:
         context['navbar'] = request.session.get('navbar')
+    if 'checkbox' in request.session:
+        context['checkbox'] = request.session.get('checkbox')
     session_contrast(request)
     return render(request, './extract.html', context)
 
@@ -42,14 +44,20 @@ def query_extract(request):
 def query_contrast(request):
     if request.is_ajax() and request.method == 'POST':
         # Fetch Source
-        source_dst = request.POST.get('source[dst]', False)
-        source_tgt = request.POST.get('source[tgt]', False)
+        source_contrast = request.POST.get('source[contrast]', False)
+        source_navbar = request.POST.get('source[navbar]', False)
+        source_checkbox = request.POST.get('source[checkbox]', False)
 
-        if not source_dst or not source_tgt:
+        print(source_contrast, source_navbar, source_checkbox)
+
+        if not source_contrast or not source_navbar or not source_checkbox:
             return JsonResponse({'jcontrast': '__ERROR__'})
 
-        request.session['contrast'] = source_dst
-        request.session['navbar'] = source_tgt
+        request.session['contrast'] = source_contrast
+        request.session['navbar'] = source_navbar
+        request.session['checkbox'] = source_checkbox
+
+        print('checkbox:', request.session['checkbox'])
 
         return JsonResponse({'jcontrast': '__SUCCESS__'})
 
@@ -59,3 +67,5 @@ def session_contrast(request):
         request.session['contrast'] = 'moon'
     if 'navbar' not in request.session:
         request.session['navbar'] = 'dark'
+    if 'checkbox' not in request.session:
+        request.session['checkbox'] = 'checked'

@@ -21,7 +21,7 @@ const rtype_conjunction_color = gcStyle.getPropertyValue('--relation-type-conjun
 // Initialization
 $(function() {
   // Contrast
-  $('#contrast_button').on('click', function() {
+  $('#switch_contrast').on('click', function() {
     toggle_scrollbar()
   })
   toggle_scrollbar()

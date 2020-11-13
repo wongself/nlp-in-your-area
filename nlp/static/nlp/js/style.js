@@ -19,7 +19,7 @@ function ajax_src_submit(source, qtype) {
   disable_operation(qtype)
 
   // Print Source
-  // console.log('source:', source)
+  console.log('source:', source)
 
   var flag = __SUCCESS__
   var qurl = '../query_' + qtype + '/'
@@ -34,7 +34,7 @@ function ajax_src_submit(source, qtype) {
     retry_limit: 3,
     success: function(ret) {
       // Print Result
-      // console.log('result:', ret)
+      console.log('result:', ret)
 
       try {
         switch (qtype) {
@@ -109,37 +109,33 @@ function enable_operation(qtype) {
 
 // Contrast
 function toggle_contrast() {
-  var $contrast = $('#contrast_button i')
-  var [org, dst, src, tgt] = ['moon', 'sun', 'dark', 'light']
-  if ($contrast.hasClass('fa-moon')) {
-    [org, dst, src, tgt] = ['moon', 'sun', 'dark', 'light']
-  } else if ($contrast.hasClass('fa-sun')) {
-    [org, dst, src, tgt] = ['sun', 'moon', 'light', 'dark']
+  var $contrast = $('#switch_contrast input')[0]
+  var s_con, t_con, s_nav, t_nav, t_ckb
+  if ($contrast.checked) {
+    [s_con, t_con, s_nav, t_nav, t_ckb] = ['moon', 'sun', 'dark', 'light', 'unchecked']
   } else {
-    raise_modal_error('未知错误，请重试！')
-    return
+    [s_con, t_con, s_nav, t_nav, t_ckb] = ['sun', 'moon', 'light', 'dark', 'checked']
   }
 
-  $contrast.removeClass('fa-' + org).addClass('fa-' + dst)
-  $('.navbar').removeClass('navbar-' + src).addClass('navbar-' + tgt)
-  $('.' + org).each(function() {
-    $(this).removeClass(org).addClass(dst)
+  $contrast.checked = !$contrast.checked
+  $('.navbar').removeClass('navbar-' + s_nav).addClass('navbar-' + t_nav)
+  $('.' + s_con).each(function() {
+    $(this).removeClass(s_con).addClass(t_con)
   })
 
   ajax_src_submit({
-    'dst': dst,
-    'tgt': tgt
+    'contrast': t_con,
+    'navbar': t_nav,
+    'checkbox': t_ckb,
   }, 'contrast')
 }
 
 function get_contrast() {
-  $contrast = $('#contrast_button i')
-  if ($contrast.hasClass('fa-moon')) {
+  var $contrast = $('#switch_contrast input')[0]
+  if ($contrast.checked) {
     return 'moon'
-  } else if ($contrast.hasClass('fa-sun')) {
-    return 'sun'
   } else {
-    raise_modal_error('未知错误，请重试！')
+    return 'sun'
   }
 }
 

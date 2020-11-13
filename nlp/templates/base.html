@@ -44,9 +44,11 @@
         <!-- Brand -->
         <a class="navbar-brand" href="{% url 'extract' %}">
           <img src="{% static 'nlp/img/svg/nlp.svg' %}" height="30"
-            class="d-inline-block align-top logo-fill {{ contrast|default:'moon' }}" alt="logo">
+            class="d-inline-block align-top logo-fill {{ contrast|default:'moon' }}"
+            alt="logo">
           <strong>
-            NLP in Your Area<sup><i class="fas fa-search fa-sm"></i></sup>
+            NLP<span class="d-none d-sm-inline-block">&nbsp;in Your
+              Area</span><sup><i class="fas fa-search fa-sm"></i></sup>
           </strong>
         </a>
         <!-- Brand -->
@@ -78,23 +80,28 @@
             <li class="nav-item ml-2" data-toggle="tooltip"
               data-placement="bottom" title="关于我们">
               <a href="http://wiki.datahammer.net/"
-                class="nav-link waves-effect waves-light px-0" target="_blank">
+                class="nav-link waves-effect waves-light p-0" target="_blank">
                 <i class="fas fa-info-circle fa-lg"></i>
               </a>
             </li>
             <li class="nav-item ml-2" data-toggle="tooltip"
               data-placement="bottom" title="项目仓库">
               <a href="https://github.com/wongself/nlp-in-your-area"
-                class="nav-link waves-effect waves-light px-0" target="_blank">
+                class="nav-link waves-effect waves-light p-0" target="_blank">
                 <i class="fab fa-github fa-lg"></i>
               </a>
             </li>
-            <li class="nav-item ml-4" data-toggle="tooltip"
-              data-placement="bottom" title="切换明暗">
-              <a type="button" class="nav-link waves-effect waves-light px-0"
-                id="contrast_button" onclick="toggle_contrast()">
-                <i class="fas fa-{{ contrast|default:'moon' }} fa-lg"></i>
-              </a>
+            <li class="nav-item d-flex align-items-center ml-4"
+              data-toggle="tooltip" data-placement="bottom" title="切换明暗">
+              <i
+                class="fas fa-sun fa-1x oppost-color {{ contrast|default:'moon' }}"></i>
+              <label class="nav-switch mx-1 my-0" id="switch_contrast"
+                onclick="toggle_contrast()">
+                <input type="checkbox" {{ checkbox|default:'checked' }}>
+                <span class="slider round"></span>
+              </label>
+              <i
+                class="fas fa-moon fa-1x oppost-color {{ contrast|default:'moon' }}"></i>
             </li>
           </ul>
           <!-- Icon -->
@@ -144,7 +151,8 @@
 
                 {% block page_intro_detail %} {% endblock %}
 
-                <a class="btn btn-deep-orange mx-0 py-2"
+                <a href="http://wiki.datahammer.net/" target="_blank"
+                  class="btn btn-deep-orange mx-0 py-2"
                   style="font-size: 1rem;">关于我们</a>
 
               </div>
@@ -168,10 +176,14 @@
   <footer class="page-footer font-small">
 
     <!-- Copyright -->
-    <div class="footer-copyright d-flex flex-center canvas-bgcolor {{ contrast|default:'moon' }} py-3">
+    <div
+      class="footer-copyright d-flex flex-center canvas-bgcolor {{ contrast|default:'moon' }} py-3">
       <span class="text-muted">© 2020 Copyright</span>
-      <span class="stress-color {{ contrast|default:'moon' }} ml-1">NLP in Your Area.</span>
-      <span class="stress-color {{ contrast|default:'moon' }} d-none d-md-flex ml-1">Beijing Institute of
+      <span class="stress-color {{ contrast|default:'moon' }} ml-1">NLP in Your
+        Area.</span>
+      <span
+        class="stress-color {{ contrast|default:'moon' }} d-none d-md-flex ml-1">Beijing
+        Institute of
         Technology.</span>
     </div>
     <!-- Copyright -->
@@ -225,7 +237,8 @@
   <script type="text/javascript" src="{% static 'nlp/js/bowser.min.js' %}">
   </script>
   <!-- Scrollbar -->
-  <script type="text/javascript" src="{% static 'nlp/js/simplebar.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'nlp/js/simplebar.min.js' %}">
+  </script>
   <!-- Variables -->
   <script type="text/javascript" src="{% static 'nlp/js/variables.js' %}">
   </script>

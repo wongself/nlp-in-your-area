@@ -28,7 +28,7 @@ active
 
       <!-- Language -->
       <button
-        class="btn dropdown-toggle stress-color object-bgcolor {{ contrast|default:'moon' }} px-3 py-2 my-0 ml-3"
+        class="btn dropdown-toggle stress-color object-bgcolor {{ contrast|default:'moon' }} px-3 py-2 my-0 ml-3 ml-sm-0 mr-0"
         type="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false" style="font-size: 1rem;"><span
           class="d-none d-sm-inline-block mr-1">源语言</span><span
@@ -48,20 +48,22 @@ active
 
     <!-- Left Tab -->
     <div class="col-12 col-lg-6 col-tab">
-      <div class="z-depth-1 rounded object-bgcolor {{ contrast|default:'moon' }}" id="left_tab">
+      <div
+        class="z-depth-1 rounded object-bgcolor {{ contrast|default:'moon' }}"
+        id="left_tab">
 
         <!-- Extract -->
         <button type="button"
           class="btn btn-primary tab-button px-2 py-1 px-sm-4 m-0"
           id="extract_button" onclick="trigger_extract()">
-          开始抽取
-          <i class="fas fa-arrow-right ml-1"></i>
+          <span>开始抽取</span>
+          <i class="fas fa-arrow-right"></i>
         </button>
         <!-- Extract -->
 
         <!-- Nav -->
-        <ul class="nav nav-tabs headup-bgcolor {{ contrast|default:'moon' }}" id="left_nav"
-          role="tablist">
+        <ul class="nav nav-tabs headup-bgcolor {{ contrast|default:'moon' }}"
+          id="left_nav" role="tablist">
           <li class="nav-item">
             <a class="nav-link stress-color object-bgcolor {{ contrast|default:'moon' }} active"
               id="tab_nav_text" data-toggle="tab" href="#tab_pane_text"
@@ -105,7 +107,7 @@ active
               <button type="button"
                 class="btn btn-link stress-color {{ contrast|default:'moon' }} p-0 m-0"
                 id="upload_button">
-                <i class="fas fa-arrow-up mr-1"></i>
+                <i class="fas fa-arrow-up"></i>
                 <span>上传文档</span>
               </button>
             </div>
@@ -115,7 +117,8 @@ active
             <!-- Upload -->
 
             <!-- Statistic -->
-            <div class="pane-widget stress-color {{ contrast|default:'moon' }}" id="left_text_stat">
+            <div class="pane-widget stress-color {{ contrast|default:'moon' }}"
+              id="left_text_stat">
               <span id="left_text_stat_curr">0</span>
               <span>/</span>
               <span>5000</span>
@@ -147,20 +150,22 @@ active
 
     <!-- Right Tab -->
     <div class="col-12 col-lg-6 col-tab mt-4 mt-lg-0">
-      <div class="z-depth-1 rounded object-bgcolor {{ contrast|default:'moon' }}" id="right_tab">
+      <div
+        class="z-depth-1 rounded object-bgcolor {{ contrast|default:'moon' }}"
+        id="right_tab">
 
         <!-- Export Button -->
         <button type="button"
           class="btn btn-blue-grey tab-button px-2 py-1 px-sm-4 m-0"
           id="export_button">
           导出结果
-          <i class="fas fa-share ml-1"></i>
+          <i class="fas fa-share"></i>
         </button>
         <!-- Export Button -->
 
         <!-- Nav -->
-        <ul class="nav nav-tabs headup-bgcolor {{ contrast|default:'moon' }}" id="right_nav"
-          role="tablist">
+        <ul class="nav nav-tabs headup-bgcolor {{ contrast|default:'moon' }}"
+          id="right_nav" role="tablist">
           <li class="nav-item">
             <a class="nav-link stress-color object-bgcolor {{ contrast|default:'moon' }} active"
               id="tab_nav_result" data-toggle="tab" href="#tab_pane_result"
@@ -177,9 +182,9 @@ active
             role="tabpanel" aria-labelledby="tab_nav_result">
 
             <!-- Showcase -->
-            <div class="pane-body" id="right_result_container"
-              data-simplebar>
-              <div class="annot-showcase stress-color {{ contrast|default:'moon' }}"
+            <div class="pane-body" id="right_result_container" data-simplebar>
+              <div
+                class="annot-showcase stress-color {{ contrast|default:'moon' }}"
                 id="right_result_area">
               </div>
             </div>

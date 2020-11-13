@@ -66,10 +66,67 @@
   width: .9rem;
   height: .9rem;
 }
+
 /* Spinner */
+
+/* Switch */
+.nav-switch {
+  position: relative;
+  display: inline-block;
+  width: 2.125rem;
+  height: 1.125rem;
+}
+
+.nav-switch input {
+  opacity: 0;
+  width: 2.125rem;
+  height: 1.125rem;
+}
+
+.nav-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cccccc;
+  transition: all .35s;
+}
+
+.nav-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: .875rem;
+  width: .875rem;
+  top: 50%;
+  left: .125rem;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  transition: all .35s;
+}
+
+.nav-switch input:checked+.slider {
+  background-color: #2196F3;
+}
+
+.nav-switch input:checked+.slider:before {
+  transform: translateX(1rem) translateY(-50%);
+}
+
+.nav-switch .slider.round {
+  border-radius: 2rem;
+}
+
+.nav-switch .slider.round:before {
+  border-radius: 50%;
+}
+
+/* Switch */
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
+
   /* Page */
   .page-intro {
     padding-top: 8rem;
@@ -89,3 +146,4 @@
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {}
+

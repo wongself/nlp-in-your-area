@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'tp&t!y-%t(x#_@zhjur#gq1ofnigdmc(&gkr4*3u@ao1viy6z@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '101.124.42.4']
 
@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['localhost', '101.124.42.4']
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
     'nlp.apps.NlpConfig',
     'django.contrib.admin',
     'django.contrib.auth',

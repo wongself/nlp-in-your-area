@@ -20,10 +20,12 @@
   --relation-type-none-color: transparent;
 
   /* Contrast */
+  --sun-oppost-color: #000000;
   --sun-stress-color: #495057;
   --sun-headup-color: #d2d2d2;
   --sun-object-color: #ffffff;
   --sun-canvas-color: #f1f1f1;
+  --moon-oppost-color: #ffffff;
   --moon-stress-color: #e6e6e6;
   --moon-headup-color: #393939;
   --moon-object-color: #2e2e2e;
@@ -71,6 +73,10 @@
 /* Filter */
 
 /* Color */
+.oppost-color {
+  color: var(--moon-oppost-color) !important;
+}
+
 .stress-color {
   color: var(--moon-stress-color) !important;
 }
@@ -87,6 +93,10 @@
   color: var(--moon-canvas-color) !important;
 }
 
+.oppost-color.sun {
+  color: var(--sun-oppost-color) !important;
+}
+
 .stress-color.sun {
   color: var(--sun-stress-color) !important;
 }
@@ -101,6 +111,10 @@
 
 .canvas-color.sun {
   color: var(--sun-canvas-color) !important;
+}
+
+.oppost-color.moon {
+  color: var(--moon-oppost-color) !important;
 }
 
 .stress-color.moon {
@@ -122,6 +136,10 @@
 /* Color */
 
 /* Background Color */
+.oppost-bgcolor {
+  background-color: var(--moon-oppost-color) !important;
+}
+
 .stress-bgcolor {
   background-color: var(--moon-stress-color) !important;
 }
@@ -138,6 +156,10 @@
   background-color: var(--moon-canvas-color) !important;
 }
 
+.oppost-bgcolor.sun {
+  background-color: var(--sun-oppost-color) !important;
+}
+
 .stress-bgcolor.sun {
   background-color: var(--sun-stress-color) !important;
 }
@@ -152,6 +174,10 @@
 
 .canvas-bgcolor.sun {
   background-color: var(--sun-canvas-color) !important;
+}
+
+.oppost-bgcolor.moon {
+  background-color: var(--moon-oppost-color) !important;
 }
 
 .stress-bgcolor.moon {

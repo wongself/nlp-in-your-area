@@ -16,15 +16,8 @@
   position: absolute;
   top: .75rem;
   right: 1rem;
-  display: flex;
-  align-items: center;
   font-size: .875rem !important;
   z-index: 1;
-}
-
-.tab-button i {
-  position: relative;
-  top: .125rem;
 }
 
 /* Tab */
@@ -94,16 +87,6 @@
   bottom: 1rem;
   font-size: .875rem !important;
   z-index: 1;
-}
-
-.pane-widget button {
-  display: flex;
-  align-items: center;
-}
-
-.pane-widget button i {
-  position: relative;
-  top: .125rem;
 }
 
 .pane-widget button,
