@@ -19,7 +19,7 @@ function ajax_src_submit(source, qtype) {
   disable_operation(qtype)
 
   // Print Source
-  console.log('source:', source)
+  // console.log('source:', source)
 
   var flag = __SUCCESS__
   var qurl = '../query_' + qtype + '/'
@@ -34,7 +34,7 @@ function ajax_src_submit(source, qtype) {
     retry_limit: 3,
     success: function(ret) {
       // Print Result
-      console.log('result:', ret)
+      // console.log('result:', ret)
 
       try {
         switch (qtype) {
