@@ -8,8 +8,7 @@ $(function() {
 
   // Browser Detect
   if (bowser.name == 'Internet Explorer') {
-    console.error('不兼容当前浏览器！')
-    console.error('Not compatible with this browser.')
+    raise_modal_error('不兼容当前浏览器！')
     return
   }
 })
