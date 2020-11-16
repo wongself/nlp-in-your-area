@@ -48,16 +48,12 @@ def query_contrast(request):
         source_navbar = request.POST.get('source[navbar]', False)
         source_checkbox = request.POST.get('source[checkbox]', False)
 
-        print(source_contrast, source_navbar, source_checkbox)
-
         if not source_contrast or not source_navbar or not source_checkbox:
             return JsonResponse({'jcontrast': '__ERROR__'})
 
         request.session['contrast'] = source_contrast
         request.session['navbar'] = source_navbar
         request.session['checkbox'] = source_checkbox
-
-        print('checkbox:', request.session['checkbox'])
 
         return JsonResponse({'jcontrast': '__SUCCESS__'})
 
