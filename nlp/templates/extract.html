@@ -181,6 +181,14 @@ active
           <div class="tab-pane fade show active" id="tab_pane_result"
             role="tabpanel" aria-labelledby="tab_nav_result">
 
+            <!-- Render Button -->
+            <button type="button" class="btn btn-sm tab-button render-button object-color stress-bgcolor {{ contrast|default:'moon' }} px-3 py-1 m-0"
+              id="render_result_button" style="display: none;" onclick="_re_render_result()">
+              重新渲染
+              <i class="fas fa-poll-h ml-1"></i>
+            </button>
+            <!-- Render Button -->
+
             <!-- Showcase -->
             <div class="pane-body" id="right_result_container" data-simplebar>
               <div

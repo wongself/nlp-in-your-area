@@ -20,6 +20,11 @@
   z-index: 1;
 }
 
+.render-button {
+  right: unset;
+  left: 1rem;
+}
+
 /* Tab */
 
 /* Tab Nav */

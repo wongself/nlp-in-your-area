@@ -1,5 +1,5 @@
 var max_length = 5000
-var prev_extract_result = null
+var pre_extract_result = null
 
 $(function() {
   // Initialization
@@ -10,16 +10,22 @@ $(function() {
 
   // Browser Detect
   if (bowser.name == 'Internet Explorer') {
-    console.error('不兼容当前浏览器！')
-    console.error('Not compatible with this browser.')
+    raise_modal_error('不兼容当前浏览器！')
     return
   }
 
+  // Resize
+  $('#right_result_container').on('widthChanged', function() {
+    waitForFinalEvent(function() {
+      if ($('#right_result_area .showcase-sentence').length > 0 && pre_extract_result != null) {
+        // console.log('Result can be rerended.')
+        $('#render_result_button').fadeIn()
+      }
+    }, 500, 'pdf_render')
+  })
+
   // Scrollbar
-  // new SimpleBar($('#left_text_container')[0])
   new SimpleBar($('#right_result_container')[0])
-  // $('#left_text_container').overlayScrollbars({ });
-  // $('#right_result_container').overlayScrollbars({ });
 
   // Key Press
   $(document).on('keydown', function(e) {
@@ -49,12 +55,14 @@ $(function() {
 
   // Export
   $('#export_button').on('click', function() {
-    export_result(prev_extract_result)
+    export_result(pre_extract_result)
   })
 })
 
 // Extract
 function trigger_extract() {
+  $('.render-button').hide()
+
   var $src = $('#left_text_area')
   var src = $src.val()
 
@@ -74,7 +82,7 @@ function parse_extract(jresult) {
   if (is_empty(jresult) || jresult == __ERROR__) {
     return __ERROR__
   }
-  prev_extract_result = jresult
+  pre_extract_result = jresult
   annotate_predict(jresult, $('#right_result_area'))
   toggle_result_placeholder()
 }
@@ -108,4 +116,10 @@ function toggle_result_placeholder() {
   } else {
     $('#right_result_place').hide()
   }
+}
+
+// Render
+function _re_render_result() {
+  $('#render_result_button').fadeOut()
+  annotate_predict(pre_extract_result, $('#right_result_area'))
 }

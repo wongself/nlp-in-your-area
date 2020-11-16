@@ -18,6 +18,7 @@
 - transformers 2.2.0+ (tested with version 3.4.0)
 - waitress (test with version 1.4.4)
 - whitenoise 5.1.0+ (test with version 5.2.0)
+- gunicorn 5.1.0+ (test with version 5.2.0)
 
 ### 环境安装
 
@@ -30,7 +31,7 @@
 
 ## 项目开发
 
-### 项目启动
+### 项目调试
 
 1. 位于项目根目录，输入命令`python manage.py runserver 0:2333`来启动网站，随后在浏览器中输入对应网址及端口`2333`。若在启动过程中出现警告，请预先执行命令`python manage.py migrate`，再执行`python manage.py runserver`。
 2. 位于项目根目录，输入命令`python ./nlp/applicaitons/spert/spert.py`来启动实体和关系识别模型，可以输入对应网址及默认端口`2334`，来测试模型是否启动成功。若页面出现出现`NLP in Your Area`，则表明模型启动成功。
@@ -38,4 +39,6 @@
 
 ### 项目维护
 
-1. 若有附加功能需要添加，可以将 Python 代码放置于`nlp_in_your_area/nlp/applicaitons`中，并在`nlp_in_your_area/nlp/urls.py`和`nlp_in_your_area/nlp/views.py`设置相应的链接跳转和消息处理。
+1. 位于项目根目录，输入命令`gunicorn nlp_in_your_area.wsgi -w 4 -k gthread -b 0.0.0.0:2333`来启动网站。不使用命令`python manage.py runserver 0:2333`启动项目的原因在于，Django 官方文档强调通过`runserver`开启的开发服务端仅用于开发测试，不适用于生产环境。所以这里使用流行的 Gunicorn 来启动可以用于生产环境的服务端。
+2. 位于项目根目录，输入命令`python ./nlp/applicaitons/spert/spert.py`来启动网站。同样地，Flask 官方文档也强调不应该使用内置的开发服务器`flask run`，推荐使用生产型 WSGI 服务器，例如 Waitress。特别地，`spert.py`中已经使用了 Waitress 服务，因此不需要特地从命令启动 Waitress 服务。
+3. 若有附加功能需要添加，可以将 Python 代码放置于`nlp_in_your_area/nlp/applicaitons`中，并在`nlp_in_your_area/nlp/urls.py`和`nlp_in_your_area/nlp/views.py`设置相应的链接跳转和消息处理。
