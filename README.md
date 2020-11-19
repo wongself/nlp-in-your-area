@@ -7,10 +7,10 @@
 - [展示网址](http://101.124.42.4:2333)
 
 ### 环境依赖
-- Python 3.7 (test with version 3.7.8)
-- Django 3.1+ (test with version 3.1.3)
+- python 3.7 (test with version 3.7.8)
+- django 3.1+ (test with version 3.1.3)
+- flask 1.1+ (tested with version 1.1.2)
 - nltk (tested with version 3.5)
-- Flask 1.1+ (tested with version 1.1.2)
 - numpy (tested with version 1.19.2)
 - scikit-learn (tested with version 0.23.2)
 - torch 1.3.0+ (tested with version 1.6.0)
