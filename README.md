@@ -18,7 +18,7 @@
 - transformers 2.2.0+ (tested with version 3.4.0)
 - waitress (test with version 1.4.4)
 - whitenoise 5.1.0+ (test with version 5.2.0)
-- gunicorn 5.1.0+ (test with version 5.2.0)
+- gunicorn 20.0.0+ (test with version 20.0.4)
 
 ### 环境安装
 
