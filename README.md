@@ -5,21 +5,21 @@
 ### 展示网址
 
 - [展示网址](http://101.124.42.4:2333)
-- [模块测试](http://101.124.42.4:2334)
+- [实体和关系模块测试](http://101.124.42.4:2334)
 
 ### 环境依赖
-- python 3.7 (test with version 3.7.8)
+- python 3.7+ (test with version 3.7.8)
 - django 3.1+ (test with version 3.1.3)
-- flask 1.1+ (tested with version 1.1.2)
+- flask (tested with version 1.1.2)
 - nltk (tested with version 3.5)
 - numpy (tested with version 1.19.2)
 - scikit-learn (tested with version 0.23.2)
-- torch 1.3.0+ (tested with version 1.6.0)
+- torch 1.1.0+ (tested with version 1.6.0)
 - tqdm (tested with version 4.50.2)
 - transformers 2.2.0+ (tested with version 3.4.0)
 - waitress (test with version 1.4.4)
-- whitenoise 5.1.0+ (test with version 5.2.0)
-- gunicorn 20.0.0+ (test with version 20.0.4)
+- whitenoise (test with version 5.2.0)
+- gunicorn (test with version 20.0.4)
 
 ### 环境安装
 
