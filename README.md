@@ -23,12 +23,29 @@
 
 ### 环境安装
 
-> 仅限 V100 服务器用户操作
-
 1. 位于用户根目录，输入命令`git clone git@github.com:wongself/nlp-in-your-area.git`来下载该仓库。
 2. 进入项目`nlp-in-your-area`的目录，输入命令`pip install -r requirements.txt`来下载环境依赖，推荐在 Anaconda 创建的虚拟环境中安装所需依赖。
 3. 位于项目根目录，输入命令`cp -r /data/wsf/nlp-in-your-area/data ./data`来导入实体和关系识别模块运行所需的预训练模型、外部数据等必要资料。
 4. 位于项目根目录，输入命令`python manage.py migrate`来测试 Django 架构是否安装成功，或者输入命令`python ./nlp/applicaitons/spert/spert.py`来测试实体和关系识别模块是否安装成功。
+
+> 第 3 步仅限 V100 服务器用户操作。不过，可以手动创建如下`data`文件夹，并将其放置在项目根目录。其中，`datasets`文件夹请在[此处](http://lavis.cs.hs-rm.de/storage/spert/public/datasets/scierc/)下载，`models`文件夹请在[此处](http://lavis.cs.hs-rm.de/storage/spert/public/models/scierc/)。`log`文件夹为空文件夹，存放入实体和关系识别模块运行日志。
+
+```
+./data
+├── datasets
+│   └── scierc
+│       ├── scierc_dev.json
+│       ├── scierc_test.json
+│       ├── scierc_train_dev.json
+│       ├── scierc_train.json
+│       └── scierc_types.json
+├── log
+└── models
+    └── scierc
+        ├── config.json
+        ├── pytorch_model.bin
+        └── vocab.txt
+```
 
 ## 项目开发
 
