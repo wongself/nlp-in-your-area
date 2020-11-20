@@ -46,7 +46,6 @@ function ajax_src_submit(source, qtype) {
               raise_modal_error('未知错误，请重试！')
               return
             }
-            console.log('Switch to ' + ret['jcontrast'])
             break
           default:
             raise_modal_error('未知错误，请重试！')

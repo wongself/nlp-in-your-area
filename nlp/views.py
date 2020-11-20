@@ -1,7 +1,11 @@
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
+import hashlib
+import demjson
 import requests
 import traceback
+
+from .models import Result
 
 
 def page_extract(request):
@@ -28,6 +32,17 @@ def query_extract(request):
         if not source:
             return JsonResponse({'jextract': '__ERROR__'})
 
+        md5 = hashlib.md5()
+        md5.update(source.encode('utf-8'))
+        src_md5 = md5.hexdigest()
+
+        if len(Result.objects.filter(src=src_md5)) > 0:
+            print('Already found the same input in the database.')
+            jextract = Result.objects.filter(
+                src=src_md5).values().first().get('res')
+            jextract = demjson.decode(jextract)
+            return JsonResponse({'jextract': jextract})
+
         # Query
         try:
             jresponse = requests.post('http://localhost:2334/query_extarct',
@@ -36,6 +51,10 @@ def query_extract(request):
         except Exception:
             jextract = '__ERROR__'
             traceback.print_exc()
+
+        if jextract != '__ERROR__':
+            print('Add the new input to the database.')
+            Result.objects.create(src=src_md5, res=jextract)
 
         return JsonResponse({'jextract': jextract})
     return render(request, './extract.html')
