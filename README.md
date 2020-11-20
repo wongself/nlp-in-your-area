@@ -11,6 +11,7 @@
 - python 3.7+ (test with version 3.7.8)
 - django 3.1+ (test with version 3.1.3)
 - flask (tested with version 1.1.2)
+- gunicorn (test with version 20.0.4)
 - nltk (tested with version 3.5)
 - numpy (tested with version 1.19.2)
 - scikit-learn (tested with version 0.23.2)
@@ -19,7 +20,6 @@
 - transformers 2.2.0+ (tested with version 3.4.0)
 - waitress (test with version 1.4.4)
 - whitenoise (test with version 5.2.0)
-- gunicorn (test with version 20.0.4)
 
 ### 环境安装
 
