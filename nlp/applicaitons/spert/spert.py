@@ -50,7 +50,7 @@ def query_extarct():
         start_time = datetime.datetime.now()
         jextract = trainer.eval(jdoc=jdocument)
         end_time = datetime.datetime.now()
-        logger.info(f'Predicting time: {(end_time - start_time).seconds}')
+        logger.info(f'Predicting time: {(end_time - start_time).microseconds} μs')
         logger.info(f'Predicted result: {jextract}')
 
         return jsonify({'jextract': jextract})
