@@ -63,6 +63,7 @@ function ajax_src_submit(source, qtype) {
     },
     error: function(ret) {
       console.error(ret)
+      raise_modal_error('未知错误，请重试！')
       enable_operation(qtype)
     }
   })
