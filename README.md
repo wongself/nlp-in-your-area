@@ -26,10 +26,10 @@
 
 1. 位于用户根目录，输入命令`git clone git@github.com:wongself/nlp-in-your-area.git`来下载该仓库。
 2. 进入项目`nlp-in-your-area`的目录，输入命令`pip install -r requirements.txt`来下载环境依赖，推荐在 Anaconda 创建的虚拟环境中安装所需依赖。
-3. 位于项目根目录，输入命令`cp -r /data/wsf/nlp-in-your-area/data ./data`来导入信息抽取模块运行所需的预训练模型、外部数据等必要资料。
+3. 位于项目根目录，手动创建`data`文件夹，来导入信息抽取模块运行所需的预训练模型、类型数据等必要资料。具体创建格式和方法见下方注释。
 4. 位于项目根目录，先后输入命令`python manage.py makemigrations`、`python manage.py migrate`来测试 Django 架构是否安装成功，还可以输入命令`python ./nlp/applicaitons/spert/spert.py`来测试信息抽取模块是否安装成功。
 
-> 第 3 步仅限 V100 服务器用户操作。不过，可以手动创建如下`data`文件夹，并将其放置在项目根目录。其中，`datasets`文件夹请在[此处](http://lavis.cs.hs-rm.de/storage/spert/public/datasets/scierc/)下载，`models`文件夹请在[此处](http://lavis.cs.hs-rm.de/storage/spert/public/models/scierc/)。`log`文件夹为空文件夹，存放入信息抽取模块运行日志。
+> 手动创建如下的`data`文件夹，并将其放置在项目根目录。其中，`datasets`文件夹请在[此处](http://lavis.cs.hs-rm.de/storage/spert/public/datasets/scierc/)下载，`models`文件夹请在[此处](http://lavis.cs.hs-rm.de/storage/spert/public/models/scierc/)。`log`文件夹为空文件夹，存放入信息抽取模块运行日志。
 
 ```
 ./data
